@@ -81,7 +81,7 @@ module.exports.typeOf = typeOf;
  * the length of the array, the entire array will be returned.
  * 
  * @param {Array} array: The array from which to return elements.
- * @param {Number} number: A value with datatype number.
+ * @param {Number} num: A value with datatype number.
  * 
  * @returns {Array}: Returns the number of elements from an array indicated
  * by the num parameter and starting from index 0. Returns the entire array if the num argument
@@ -121,7 +121,7 @@ module.exports.first = first;
  * the length of the array, the entire array will be returned.
  * 
  * @param {Array} array: The array from which to return elements.
- * @param {Number} number: A value with datatype number.
+ * @param {Number} num: A value with datatype number.
  * 
  * @returns {Array}: Returns the number of elements from an array indicated
  * by the num parameter and starting from the last index in the array. 
@@ -160,7 +160,7 @@ module.exports.last = last;
  * return -1.
  * 
  * @param {Array} array: The array being searched for an input value.
- * @param {*} number: A value with any datatype to search for matches with in array.
+ * @param {*} value: A value with any datatype to search for matches with in array.
  * 
  * @returns {Number}: Returns the index of the array argument where the value argument occurs
  * first. If the value is not found within the array, returns -1.
@@ -190,7 +190,7 @@ module.exports.indexOf = indexOf;
  * true if the value is present and false if the value is not present in the array
  * 
  * @param {Array} array: The array being searched for an input value.
- * @param {*} number: A value with any datatype to search for matches with in array.
+ * @param {*} value: A value with any datatype to search for matches with in array.
  * 
  * @returns {Boolean}: Returns true if the input value is found within the array with the 
  * same datatype. If a matching value is not found within the array, or if the matching value
@@ -215,35 +215,6 @@ function contains(array, value) {
 }
 
 module.exports.contains = contains;
-
-/**
- * each: Designed to perform an action on each element of an array or each property of an object
- * based on an input function
- * 
- * @param {Collection} collection: The collection on which the action is being performed
- * @param {Function} action: A function that will perform an action on each element or property 
- * of the collection passed to to each function.
- */
- 
-function each(collection, func) {
-    // check if the collection passed to the each function is an array
-    if (Array.isArray(collection)) {
-        // if array, loop through using a for loop
-        for (let i = 0; i < collection.length; i++) {
-            // pass each element of the array to the callback function, which should take the element, the index number, and the array as arguments
-            func(collection[i], i, collection);
-        } 
-    // check if the collection is an object by checking for not array and datatype 'object'
-    } else if (!Array.isArray(collection) && typeof collection === 'object') {
-        // if true, loop through the object with a for in loop
-        for (let key in collection) {
-            // pass each property of the object to the callback function, which should take the value, key, and entire object as arguments
-            func(collection[key], key, collection);
-        }
-    }   
-}
-
-module.exports.each = each;
 
 /**
  * unique: Designed to iterate through an input array and return a new array with all duplicate elements removed.
@@ -276,7 +247,7 @@ module.exports.unique = unique;
  * returns boolean true.
  * 
  * @param {Array} array: An array to run each element through a function.
- * @param {Function} action: Function will test each element of the input array based on a conditional
+ * @param {Function} func: Function will test each element of the input array based on a conditional
  * statement and return Boolean true or false based on whether or not the element passed the condition.
  * The function will take the element of the array, the index, and the entire array as arguments.
  * 
@@ -302,7 +273,7 @@ module.exports.filter = filter;
  * returns boolean false.
  * 
  * @param {Array} array: An array to run each element through a function.
- * @param {Function} action: Function will test each element of the input array based on a conditional
+ * @param {Function} func: Function will test each element of the input array based on a conditional
  * statement and return Boolean true or false based on whether or not the element passed the condition.
  * The function will take the element of the array, the index, and the entire array as arguments.
  * 
@@ -328,7 +299,7 @@ module.exports.reject = reject;
  * True and false results will be separated into individual arrays, which are then pushed to a results array.
  * 
  * @param {Array} array: An array to run each element through a function.
- * @param {Function} action: Function will test each element of the input array based on a conditional
+ * @param {Function} func: Function will test each element of the input array based on a conditional
  * statement and return Boolean true or false based on whether or not the element passed the condition.
  * The function will take the element of the array, the index, and the entire array as arguments.
  * 
@@ -359,7 +330,7 @@ module.exports.partition = partition;
  * function that will return something.
  * 
  * @param {Collection} Collection: An array or object to run each element/property value through a function.
- * @param {Function} action: Function will take some action on each element/property value and return a new value.
+ * @param {Function} func: Function will take some action on each element/property value and return a new value.
  * 
  * @returns {Array}: Returns a new array containing each of the values returned from the input function when the 
  * array elements or object property values were passed through.
@@ -391,8 +362,8 @@ module.exports.map = map;
  * pluck: Designed to iterate through an input array contiaining objects and for each object 
  * within the array, push the value associated with an input property to a new array. The new array is returned.
  * 
- * @param {Array} Array: An array of objects.
- * @param {String} property: A string representing the property name to be used when pushing associated values
+ * @param {Array} array: An array of objects.
+ * @param {String} prop: A string representing the property name to be used when pushing associated values
  * from the object to the new array.
  * 
  * @returns {Array}: Returns a new array containing the value from each object in the input array that is associated
@@ -413,8 +384,8 @@ module.exports.pluck = pluck;
  * every: Designed to iterate through a collection of data, pass each element or property value through
  * a function, and return true only if the function returns true for each value in the collection.
  * 
- * @param {Collection} Collection: A collection of data, may be array or object.
- * @param {Function} action: evaluate each piece of data based on a condition and return Boolean true or false value
+ * @param {Collection} collection: A collection of data, may be array or object.
+ * @param {Function} func: evaluate each piece of data based on a condition and return Boolean true or false value
  * 
  * @returns {Boolean}: Returns true only if every value within the collection of data resolves to true when passed
  * to the input function. If any value returns false, the entire function will return false.
@@ -475,8 +446,8 @@ module.exports.every = every;
  * a function, and return true if at least one value in the collection resolves to true when passed to the
  * input function.
  * 
- * @param {Collection} Collection: A collection of data, may be array or object.
- * @param {Function} action: evaluate each piece of data based on a condition and return Boolean true or false value
+ * @param {Collection} collection: A collection of data, may be array or object.
+ * @param {Function} func: evaluate each piece of data based on a condition and return Boolean true or false value
  * 
  * @returns {Boolean}: Returns true if at least one value in the collection returns true when passed to the input fuction. If no 
  * values in the collection result in true, the function returns false.
@@ -537,8 +508,8 @@ module.exports.some = some;
  * reduce: Designed to iterate through a collection of data passing each element to an input function,  
  * and update a result variable with the return value.
  * 
- * @param {Array} Array: An array of elements
- * @param {Function} action: take a value as an argument and return a value. The function should take a starting value
+ * @param {Array} array: An array of elements
+ * @param {Function} func: take a value as an argument and return a value. The function should take a starting value
  * (the previous result), an array element, and an array index as parameters.
  * @param {*} seed: A starting value of any datatype for use in the function. This is an optional parameter. If no seed 
  * is passed to the function, the starting result will be set equal to the first index of the input array and the function
@@ -581,9 +552,9 @@ module.exports.reduce = reduce;
  * extend: Designed to take a variable number of objects greater than or equal to 2 as arguments and update the first
  * object with all of the properties of the remaining objects.
  * 
- * @param {Object} Objects: A variable number of objects
+ * @param {Object} obj: A variable number of objects
  * 
- * @returns {*}: Returns the first object updated to include each key:value pair from all additional objects passed
+ * @returns {Object}: Returns the first object updated to include each key:value pair from all additional objects passed
  * to the function
  */
  

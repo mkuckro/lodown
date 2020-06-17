@@ -1,0 +1,29 @@
+{
+  "name": "lodown-mkuckro",
+  "version": "1.0.1",
+  "description": "my lowdown library",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "istanbul cover _mocha -- test/ -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkuckro/lodown.git"
+  },
+  "author": "Megan Kuckro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mkuckro/lodown/issues"
+  },
+  "homepage": "https://github.com/mkuckro/lodown#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "i": "^0.3.6",
+    "istanbul": "^0.4.5",
+    "mocha": "^8.0.1",
+    "sinon": "^9.0.2"
+  }
+}
